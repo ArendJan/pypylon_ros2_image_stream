@@ -25,7 +25,9 @@ class CameraPublisher(Node):
         # initialize publisher
         self.publisher_ = self.create_publisher(Image, topic, queue)
         self.camera = pylon.InstantCamera(pylon.TlFactory.GetInstance().CreateFirstDevice())
-
+        self.camera.Open()
+        self.camera.Width.SetValue(700)
+        self.camera.Height.SetValue(700)
         # Grabing Continusely (video) with minimal delay
         self.camera.StartGrabbing(pylon.GrabStrategy_LatestImageOnly) 
         self.converter = pylon.ImageFormatConverter()
